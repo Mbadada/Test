@@ -1,0 +1,45 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Survive The Night Autofarm", "GrapeTheme")
+
+local MainTab = Window:NewTab("Main")
+local MainSection = MainTab:NewSection("Main")
+
+MainSection:NewButton("Execute this first", "Run this first before the second one", function()
+    local _a = Instance.new("Part")
+_a.Anchored = true
+_a.Name = "Platform"
+_a.Parent = workspace
+_a.Transparency = 0.75
+_a.Size = Vector3.new(5,1,5)
+_G.On = true
+
+while _G.On do
+    for da, _b in pairs(game.Workspace:GetChildren()) do
+        if _b.Name == "Platform" then
+            _b.CFrame = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(0, -4, 0)
+            wait()
+        end
+    end
+end
+
+end)
+
+MainSection:NewButton("Start Autofarm", "Run Autofarm", function()
+    local on = true
+local speed = 7 -- the higher the number the slower you go.
+_G.ON = on
+
+tweenService, tweenInfo = game:GetService("TweenService"), TweenInfo.new(speed, Enum.EasingStyle.Linear)
+
+while _G.ON do
+for i,v in pairs(game:GetService("Workspace").TempMap.Main.Relics:GetChildren()) do
+    if v:IsA("MeshPart") then
+tween = tweenService:Create(game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart, tweenInfo, {CFrame = CFrame.new(v.Position)})
+tween:Play()
+wait(7)
+fireproximityprompt(v.RelicPrompt)
+end
+end
+end
+
+end)
